@@ -17,6 +17,11 @@ body {
   font-size: 14px;
   background-color: #eff2f1; }
 
+
+.shopgrid{
+  display: flex;
+  flex-direction: row;
+}
 a {
   text-decoration: none;
   -webkit-transition: .3s all ease;

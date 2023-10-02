@@ -2,20 +2,13 @@ import React from 'react'
 import Image from 'next/image'
 import '../scss/style.scss';
 import '../css/style.css';
-import {products} from '../products';
 import '../css/bootstrap.min.css';
 import '../css/tiny-slider.css';
-import cart from '../images/cart.svg';
-import couch from '../images/couch.png';
-import cross from '../images/cross.svg';
-import sofa from '../images/sofa.png';
-import envelope from '../images/envelope-outline.svg';
-import user from './images/user.svg';
 
-
-const shop = () => {
+const ContactUs = () => {
   return (
-    <>
+    <div>
+        <>
   {/* Start Header/Navigation */}
   <nav
     className="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark"
@@ -38,12 +31,12 @@ const shop = () => {
       </button>
       <div className="collapse navbar-collapse" id="navbarsFurni">
         <ul className="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-          <li className="nav-item ">
+          <li className="nav-item">
             <a className="nav-link" href="index.html">
               Home
             </a>
           </li>
-          <li className="active">
+          <li>
             <a className="nav-link" href="shop.html">
               Shop
             </a>
@@ -63,7 +56,7 @@ const shop = () => {
               Blog
             </a>
           </li>
-          <li>
+          <li className="active">
             <a className="nav-link" href="contact.html">
               Contact us
             </a>
@@ -72,12 +65,12 @@ const shop = () => {
         <ul className="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
           <li>
             <a className="nav-link" href="#">
-              <Image alt='user' src={user} />
+              <img src="images/user.svg" />
             </a>
           </li>
           <li>
             <a className="nav-link" href="cart.html">
-              <Image alt='' src={cart} />
+              <img src="images/cart.svg" />
             </a>
           </li>
         </ul>
@@ -91,63 +84,180 @@ const shop = () => {
       <div className="row justify-content-between">
         <div className="col-lg-5">
           <div className="intro-excerpt">
-            <h1>Shop</h1>
+            <h1>Contact</h1>
+            <p className="mb-4">
+              Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet
+              velit. Aliquam vulputate velit imperdiet dolor tempor tristique.
+            </p>
+            <p>
+              <a href="" className="btn btn-secondary me-2">
+                Shop Now
+              </a>
+              <a href="#" className="btn btn-white-outline">
+                Explore
+              </a>
+            </p>
           </div>
         </div>
-        <div className="col-lg-7"></div>
-      </div>
-    </div>
-  </div>
-
-  {products.map((product, index) => {
-
-return(
-  <div className="untree_co-section product-section before-footer-section">
-  <div className="container">
-    <div className="row ">
-      {/* Start Column 1 */}
-
-        <div className='shopgrid'>
-        <div className="col-12 col-md-4 col-lg-3 mb-5">
-        <a className="product-item" href="#">
-          <Image
-              alt=''
-            src={product.img}
-            className="img-fluid product-thumbnail"
-          />
-          <h3 className="product-title">{product.title}</h3>
-          <strong className="product-price">{product.price}</strong>
-          <span className="icon-cross">
-            <Image src={cross} alt='' className="img-fluid" />
-          </span>
-        </a>
-      </div>
+        <div className="col-lg-7">
+          <div className="hero-img-wrap">
+            <img src="images/couch.png" className="img-fluid" />
+          </div>
         </div>
-
-
-      
-      
-      {/* End Column 4 */}
-    </div>
+      </div>
     </div>
   </div>
-)})}
-
   {/* End Hero Section */}
- 
+  {/* Start Contact Form */}
+  <div className="untree_co-section">
+    <div className="container">
+      <div className="block">
+        <div className="row justify-content-center">
+          <div className="col-md-8 col-lg-8 pb-4">
+            <div className="row mb-5">
+              <div className="col-lg-4">
+                <div
+                  className="service no-shadow align-items-center link horizontal d-flex active"
+                  data-aos="fade-left"
+                  data-aos-delay={0}
+                >
+                  <div className="service-icon color-1 mb-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={16}
+                      height={16}
+                      fill="currentColor"
+                      className="bi bi-geo-alt-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                    </svg>
+                  </div>{" "}
+                  {/* /.icon */}
+                  <div className="service-contents">
+                    <p>43 Raymouth Rd. Baltemoer, London 3910</p>
+                  </div>{" "}
+                  {/* /.service-contents*/}
+                </div>{" "}
+                {/* /.service */}
+              </div>
+              <div className="col-lg-4">
+                <div
+                  className="service no-shadow align-items-center link horizontal d-flex active"
+                  data-aos="fade-left"
+                  data-aos-delay={0}
+                >
+                  <div className="service-icon color-1 mb-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={16}
+                      height={16}
+                      fill="currentColor"
+                      className="bi bi-envelope-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
+                    </svg>
+                  </div>{" "}
+                  {/* /.icon */}
+                  <div className="service-contents">
+                    <p>info@yourdomain.com</p>
+                  </div>{" "}
+                  {/* /.service-contents*/}
+                </div>{" "}
+                {/* /.service */}
+              </div>
+              <div className="col-lg-4">
+                <div
+                  className="service no-shadow align-items-center link horizontal d-flex active"
+                  data-aos="fade-left"
+                  data-aos-delay={0}
+                >
+                  <div className="service-icon color-1 mb-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={16}
+                      height={16}
+                      fill="currentColor"
+                      className="bi bi-telephone-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"
+                      />
+                    </svg>
+                  </div>{" "}
+                  {/* /.icon */}
+                  <div className="service-contents">
+                    <p>+1 294 3925 3939</p>
+                  </div>{" "}
+                  {/* /.service-contents*/}
+                </div>{" "}
+                {/* /.service */}
+              </div>
+            </div>
+            <form>
+              <div className="row">
+                <div className="col-6">
+                  <div className="form-group">
+                    <label className="text-black" htmlFor="fname">
+                      First name
+                    </label>
+                    <input type="text" className="form-control" id="fname" />
+                  </div>
+                </div>
+                <div className="col-6">
+                  <div className="form-group">
+                    <label className="text-black" htmlFor="lname">
+                      Last name
+                    </label>
+                    <input type="text" className="form-control" id="lname" />
+                  </div>
+                </div>
+              </div>
+              <div className="form-group">
+                <label className="text-black" htmlFor="email">
+                  Email address
+                </label>
+                <input type="email" className="form-control" id="email" />
+              </div>
+              <div className="form-group mb-5">
+                <label className="text-black" htmlFor="message">
+                  Message
+                </label>
+                <textarea
+                  name=""
+                  className="form-control"
+                  id="message"
+                  cols={30}
+                  rows={5}
+                  defaultValue={""}
+                />
+              </div>
+              <button type="submit" className="btn btn-primary-hover-outline">
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {/* End Contact Form */}
   {/* Start Footer Section */}
   <footer className="footer-section">
     <div className="container relative">
       <div className="sofa-img">
-        <Image src={sofa} alt="Image" className="img-fluid" />
+        <img src="images/sofa.png" alt="Image" className="img-fluid" />
       </div>
       <div className="row">
         <div className="col-lg-8">
           <div className="subscription-form">
             <h3 className="d-flex align-items-center">
               <span className="me-1">
-                <Image
-                  src={envelope}
+                <img
+                  src="images/envelope-outline.svg"
                   alt="Image"
                   className="img-fluid"
                 />
@@ -182,7 +292,7 @@ return(
         <div className="col-lg-4">
           <div className="mb-4 footer-logo-wrap">
             <a href="#" className="footer-logo">
-              Off The Grid<span>.</span>
+              Furni<span>.</span>
             </a>
           </div>
           <p className="mb-4">
@@ -303,7 +413,8 @@ return(
   {/* End Footer Section */}
 </>
 
+    </div>
   )
 }
 
-export default shop
+export default ContactUs
