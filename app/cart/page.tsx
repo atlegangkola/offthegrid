@@ -1,4 +1,6 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react';
+import { discount } from '../discount';
 import '../scss/style.scss';
 import Image from 'next/image'
 import '../css/style.css';
@@ -11,11 +13,123 @@ import product2 from '../images/product-2.png';
 import sofa from '../images/sofa.png';
 import envelope from '../images/envelope-outline.svg';
 
-const cart = () => {
+interface IProduct {
+  id: string;
+  img: StaticImageData;
+  title: string;
+  description: string;
+  price: number;
+  quantity: number;
+}
+
+interface Idiscount{
+  id: string;
+  discount: string;
+  discountby: number;
+}
+
+const CartPage = () => {
+  // State to hold the products retrieved from localStorage
+  const [cartProducts, setCartProducts] = useState<IProduct[]>([]);
+  const [couponCode, setCouponCode] = useState<string>('');
+  const [discountApplied, setDiscountApplied] = useState<number | null>(null);
+
+
+  // Function to retrieve products from localStorage
+  const getProductsFromLocalStorage = () => {
+    const storedProducts = localStorage.getItem('myData');
+    if (storedProducts) {
+      const parsedProducts = JSON.parse(storedProducts);
+      setCartProducts(parsedProducts);
+    }
+  };
+
+  // Function to increase the quantity of a product
+  const increaseQuantity = (productId: string) => {
+    const updatedCartProducts = cartProducts.map((product) => {
+      if (product.id === productId) {
+        return {
+          ...product,
+          quantity: product.quantity + 1,
+        };
+      }
+      return product;
+    });
+    setCartProducts(updatedCartProducts);
+    updateLocalStorage(updatedCartProducts);
+  };
+
+  // Function to decrease the quantity of a product
+ // Function to decrease the quantity of a product or remove it if the quantity reaches zero
+const decreaseQuantity = (productId: string) => {
+  const updatedCartProducts = cartProducts.map((product) => {
+    if (product.id === productId) {
+      const updatedQuantity = product.quantity - 1;
+      if (updatedQuantity <= 0) {
+        // If quantity reaches zero or less, remove the item from the cart
+        return null;
+      } else {
+        return {
+          ...product,
+          quantity: updatedQuantity,
+        };
+      }
+    }
+    return product;
+  });
+
+  // Filter out null values (removed items) from the updatedCartProducts
+  const filteredCartProducts = updatedCartProducts.filter((product) => product !== null) as IProduct[];
+
+  setCartProducts(filteredCartProducts);
+  updateLocalStorage(filteredCartProducts);
+};
+
+
+  // Function to update localStorage with the new cartProducts
+  const updateLocalStorage = (updatedCartProducts: IProduct[]) => {
+    localStorage.setItem('myData', JSON.stringify(updatedCartProducts));
+  };
+
+  // Call the function to get products when the component mounts
+  useEffect(() => {
+    getProductsFromLocalStorage();
+  }, []);
+
+  const calculateTotal = () => {
+    let total = 0;
+    cartProducts.forEach((product) => {
+      total += product.price * product.quantity;
+    });
+    return total; // Return the total as a number
+  };
+
+
+  const removeItem = (productId: string) => {
+    const updatedCartProducts = cartProducts.filter((product) => product.id !== productId);
+    setCartProducts(updatedCartProducts);
+    updateLocalStorage(updatedCartProducts);
+  };
+
+
+  const applyCoupon = () => {
+    const foundDiscount = discount.find((item) => item.discount === couponCode);
+
+    if (foundDiscount) {
+      const discountPercentage = foundDiscount.discountby;
+      const totalWithDiscount = calculateTotal() * (1 - discountPercentage);
+      setDiscountApplied(discountPercentage);
+      // You can update your cart total with the discounted value here
+    } else {
+      // Handle an invalid coupon code
+      setDiscountApplied(null); // Reset the discount if the code is invalid
+      // You can display an error message to the user here
+    }
+  };
+
   return (
     <>
-  {/* Start Header/Navigation */}
-  <nav
+       <nav
     className="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark"
     arial-label="Furni navigation bar"
   >
@@ -82,7 +196,8 @@ const cart = () => {
       </div>
     </div>
   </nav>
-  {/* End Header/Navigation */}
+
+   {/* End Header/Navigation */}
   {/* Start Hero Section */}
   <div className="hero">
     <div className="container">
@@ -96,7 +211,7 @@ const cart = () => {
       </div>
     </div>
   </div>
-  {/* End Hero Section */}
+
   <div className="untree_co-section before-footer-section">
     <div className="container">
       <div className="row mb-5">
@@ -114,107 +229,41 @@ const cart = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="product-thumbnail">
-                    <Image
-                      src={product1}
-                      alt="Image"
-                      className="img-fluid"
-                    />
-                  </td>
-                  <td className="product-name">
-                    <h2 className="h5 text-black">Product 1</h2>
-                  </td>
-                  <td>$49.00</td>
-                  <td>
-                    <div
-                      className="input-group mb-3 d-flex align-items-center quantity-container"
-                      style={{ maxWidth: 120 }}
-                    >
-                      <div className="input-group-prepend">
-                        <button
-                          className="btn btn-outline-black decrease"
-                          type="button"
-                        >
-                          −
-                        </button>
-                      </div>
-                      <input
-                        type="text"
-                        className="form-control text-center quantity-amount"
-                        defaultValue={1}
-                        placeholder=""
-                        aria-label="Example text with button addon"
-                        aria-describedby="button-addon1"
-                      />
-                      <div className="input-group-append">
-                        <button
-                          className="btn btn-outline-black increase"
-                          type="button"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-                  </td>
-                  <td>$49.00</td>
-                  <td>
-                    <a href="#" className="btn btn-black btn-sm">
-                      X
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="product-thumbnail">
-                    <Image
-                      src={product2}
-                      alt="Image"
-                      className="img-fluid"
-                    />
-                  </td>
-                  <td className="product-name">
-                    <h2 className="h5 text-black">Product 2</h2>
-                  </td>
-                  <td>$49.00</td>
-                  <td>
-                    <div
-                      className="input-group mb-3 d-flex align-items-center quantity-container"
-                      style={{ maxWidth: 120 }}
-                    >
-                      <div className="input-group-prepend">
-                        <button
-                          className="btn btn-outline-black decrease"
-                          type="button"
-                        >
-                          −
-                        </button>
-                      </div>
-                      <input
-                        type="text"
-                        className="form-control text-center quantity-amount"
-                        defaultValue={1}
-                        placeholder=""
-                        aria-label="Example text with button addon"
-                        aria-describedby="button-addon1"
-                      />
-                      <div className="input-group-append">
-                        <button
-                          className="btn btn-outline-black increase"
-                          type="button"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-                  </td>
-                  <td>$49.00</td>
-                  <td>
-                    <a href="#" className="btn btn-black btn-sm">
-                      X
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
+          {cartProducts.map((product) => (
+            <tr key={product.id}>
+              <td className="product-thumbnail">
+                <img src={product.img.src} alt={product.title} className="img-fluid" />
+              </td>
+              <td className="product-name">
+                <h2 className="h5 text-black">{product.title}</h2>
+              </td>
+              <td>R{product.price.toFixed(2)}</td>
+              <td>
+                <div className="input-group mb-3 d-flex align-items-center quantity-container" style={{ maxWidth: 120 }}>
+                  <div className="input-group-prepend">
+                    <button className="btn btn-outline-black decrease" type="button" onClick={() => decreaseQuantity(product.id)}>
+                      -
+                    </button>
+                  </div>
+                  <span className="form-control text-center quantity-amount">
+                    {product.quantity}
+                  </span>
+                  <div className="input-group-append">
+                    <button className="btn btn-outline-black increase" type="button" onClick={() => increaseQuantity(product.id)}>
+                      +
+                    </button>
+                  </div>
+                </div>
+              </td>
+              <td>R{(product.price * product.quantity).toFixed(2)}</td>
+              <td>
+                <a href="#" className="btn btn-black btn-sm" onClick={() => removeItem(product.id)} >
+                  X
+                </a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
             </table>
           </div>
         </form>
@@ -241,15 +290,17 @@ const cart = () => {
               <p>Enter your coupon code if you have one.</p>
             </div>
             <div className="col-md-8 mb-3 mb-md-0">
-              <input
-                type="text"
-                className="form-control py-3"
-                id="coupon"
-                placeholder="Coupon Code"
-              />
-            </div>
+            <input
+              type="text"
+              className="form-control py-3"
+              id="coupon"
+              placeholder="Coupon Code"
+              value={couponCode}
+              onChange={(e) => setCouponCode(e.target.value)}
+            />
+          </div>
             <div className="col-md-4">
-              <button className="btn btn-black">Apply Coupon</button>
+              <button className="btn btn-black" onClick={applyCoupon}>Apply Coupon</button>
             </div>
           </div>
         </div>
@@ -266,17 +317,34 @@ const cart = () => {
                   <span className="text-black">Subtotal</span>
                 </div>
                 <div className="col-md-6 text-right">
-                  <strong className="text-black">$230.00</strong>
+                  <strong className="text-black">R{calculateTotal().toFixed(2)}</strong>
                 </div>
               </div>
-              <div className="row mb-5">
-                <div className="col-md-6">
-                  <span className="text-black">Total</span>
-                </div>
-                <div className="col-md-6 text-right">
-                  <strong className="text-black">$230.00</strong>
-                </div>
+              
+
+             
+
+              {discountApplied !== null ? (
+          <div className="row mb-5">
+            <div className="col-md-6">
+              <span className="text-black">Total: R{calculateTotal().toFixed(2)}</span>
+            </div>
+            <div className="col-md-6">
+              <span className="text-black">Discount Applied: {discountApplied * 100}%</span>
+            </div>
+              <div>
+                <strong>Total with Discount: R{(calculateTotal() * (1 - discountApplied)).toFixed(2)}</strong>
               </div>
+          </div>
+        ) : (
+
+          
+          <h4>Total: R{calculateTotal().toFixed(2)}</h4>
+        )}
+
+
+
+
               <div className="row">
                 <div className="col-md-12">
                   <button
@@ -292,176 +360,10 @@ const cart = () => {
         </div>
       </div>
     </div>
-  </div>
-  {/* Start Footer Section */}
-  <footer className="footer-section">
-    <div className="container relative">
-      <div className="sofa-img">
-        <Image src={sofa} alt="Image" className="img-fluid" />
-      </div>
-      <div className="row">
-        <div className="col-lg-8">
-          <div className="subscription-form">
-            <h3 className="d-flex align-items-center">
-              <span className="me-1">
-                <Image
-                  src={envelope}
-                  alt="Image"
-                  className="img-fluid"
-                />
-              </span>
-              <span>Subscribe to Newsletter</span>
-            </h3>
-            <form action="#" className="row g-3">
-              <div className="col-auto">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter your name"
-                />
-              </div>
-              <div className="col-auto">
-                <input
-                  type="email"
-                  className="form-control"
-                  placeholder="Enter your email"
-                />
-              </div>
-              <div className="col-auto">
-                <button className="btn btn-primary">
-                  <span className="fa fa-paper-plane" />
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div className="row g-5 mb-5">
-        <div className="col-lg-4">
-          <div className="mb-4 footer-logo-wrap">
-            <a href="#" className="footer-logo">
-              Off The Grid<span>.</span>
-            </a>
-          </div>
-          <p className="mb-4">
-            Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis
-            nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate
-            velit imperdiet dolor tempor tristique. Pellentesque habitant
-          </p>
-          <ul className="list-unstyled custom-social">
-            <li>
-              <a href="#">
-                <span className="fa fa-brands fa-facebook-f" />
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <span className="fa fa-brands fa-twitter" />
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <span className="fa fa-brands fa-instagram" />
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <span className="fa fa-brands fa-linkedin" />
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div className="col-lg-8">
-          <div className="row links-wrap">
-            <div className="col-6 col-sm-6 col-md-3">
-              <ul className="list-unstyled">
-                <li>
-                  <a href="#">About us</a>
-                </li>
-                <li>
-                  <a href="#">Services</a>
-                </li>
-                <li>
-                  <a href="#">Blog</a>
-                </li>
-                <li>
-                  <a href="#">Contact us</a>
-                </li>
-              </ul>
-            </div>
-            <div className="col-6 col-sm-6 col-md-3">
-              <ul className="list-unstyled">
-                <li>
-                  <a href="#">Support</a>
-                </li>
-                <li>
-                  <a href="#">Knowledge base</a>
-                </li>
-                <li>
-                  <a href="#">Live chat</a>
-                </li>
-              </ul>
-            </div>
-            <div className="col-6 col-sm-6 col-md-3">
-              <ul className="list-unstyled">
-                <li>
-                  <a href="#">Jobs</a>
-                </li>
-                <li>
-                  <a href="#">Our team</a>
-                </li>
-                <li>
-                  <a href="#">Leadership</a>
-                </li>
-                <li>
-                  <a href="#">Privacy Policy</a>
-                </li>
-              </ul>
-            </div>
-            <div className="col-6 col-sm-6 col-md-3">
-              <ul className="list-unstyled">
-                <li>
-                  <a href="#">Nordic Chair</a>
-                </li>
-                <li>
-                  <a href="#">Kruzo Aero</a>
-                </li>
-                <li>
-                  <a href="#">Ergonomic Chair</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="border-top copyright">
-        <div className="row pt-4">
-          <div className="col-lg-6">
-            <p className="mb-2 text-center text-lg-start">
-              Copyright ©. All Rights Reserved. — Designed with love by{" "}
-              <a href="https://untree.co">Untree.co</a> Distributed By{" "}
-              <a href="https://themewagon.com">ThemeWagon</a>{" "}
-              {/* License information: https://untree.co/license/ */}
-            </p>
-          </div>
-          <div className="col-lg-6 text-center text-lg-end">
-            <ul className="list-unstyled d-inline-flex ms-auto">
-              <li className="me-4">
-                <a href="#">Terms &amp; Conditions</a>
-              </li>
-              <li>
-                <a href="#">Privacy Policy</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-  {/* End Footer Section */}
-</>
-
-  )
+  </div> 
+      
+    </>
+  );
 }
 
-export default cart
+export default CartPage;

@@ -150,6 +150,9 @@ function AddToCart(product:IProduct){
       </div>
     </div>
   </nav>
+
+  
+
   {/* End Header/Navigation */}
   {/* Start Hero Section */}
   <div className="hero">
