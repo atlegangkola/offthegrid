@@ -1,5 +1,9 @@
 'use client'
+import React, { useState, useEffect } from 'react';
 import Image, { StaticImageData } from 'next/image'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import './scss/style.scss';
 import styles from './page.module.css'
 import './css/style.css';
@@ -9,7 +13,7 @@ import './css/style.scss';
 import {products} from './products';
 import couch from './images/couch.png';
 import user from './images/user.svg';
-import cart from './images/cart.svg';
+import cart1 from './images/cart.svg';
 import cross from './images/cross.svg';
 import product1 from './images/product-1.png';
 import product2 from './images/product-2.png';
@@ -30,11 +34,13 @@ import sofa from './images/sofa.png';
 import envelope from './images/envelope-outline.svg';
 import house from './images/house_bg.png';
 import s_image1 from './images/s-image1.jpg';
-import { useState } from "react";
+
 
 export default function Home() {
 
 const [_products, setProducts] = useState<IProduct[]>([]);
+const [cart, setCart] = useState<IProduct[]>([]); // Specify the type for cart
+const [cartCounter, setCartCounter] = useState<number>(0); // Specify the type for cartCounter
 
 interface IProduct{
   id:string,
@@ -45,37 +51,60 @@ interface IProduct{
   quantity:number
 }
 
+function AddToCart(product: IProduct) {
+  const hasProduct = products.find((x) => x.id === product.id);
 
-function AddToCart(product:IProduct){
+  if (hasProduct) {
+    // Product is in the cart, increase quantity
+    const updatedProducts = products.map((x) =>
+      x.id === product.id ? { ...x, quantity: x.quantity + 1 } : x
+    );
+    setProducts(updatedProducts);
 
-  const hasProduct = _products.filter(x=>x.id == product.id);
-  
-  if(hasProduct.length>0){
-    //product is in the cart, increase quantity
-    const currentProducts = _products.filter(x=>x.id!=product.id);
-    const newProductWithUpdatedQuantity = {
-        ...hasProduct[0],
-        quantity: hasProduct[0].quantity +1
-      };
-      const newProducts =[...currentProducts, newProductWithUpdatedQuantity] as IProduct[];
-      setProducts(newProducts);
-      console.log("PRODUCTS-1", _products)
-  }else{
-    //product is not in the card - add quantity =1
+    // Display a success message
+    toast.success(`${product.title} added to cart`);
+  } else {
+    // Product is not in the cart - add with quantity = 1
     const productToAdd = {
       ...product,
-      quantity:1
-    }
-    
-    const newProducts = [..._products, productToAdd] as IProduct[];
-    setProducts(newProducts);
-    console.log("PRODUCTS-2", _products)
+      quantity: 1,
+    };
 
-    
+    const newProducts = [...products, productToAdd] as IProduct[];
+    setProducts(newProducts);
+
+    // Display a success message
+    toast.success(`${product.title} added to cart`);
   }
-  localStorage.setItem('myData', JSON.stringify(_products));
+
+  localStorage.setItem('myData', JSON.stringify(products));
 }
 
+
+
+// Load cart data from local storage when the component mounts
+useEffect(() => {
+  const savedCart = localStorage.getItem('cart');
+  if (savedCart !== null) {
+    const parsedCart = JSON.parse(savedCart);
+    setCart(parsedCart);
+    updateCartCounter(parsedCart);
+  }
+}, []);
+
+// Function to add an item to the cart and update the counter
+const addToCart = (product: IProduct) => { // Specify the type for product
+  const updatedCart = [...cart, product];
+  setCart(updatedCart);
+  updateCartCounter(updatedCart);
+  localStorage.setItem('cart', JSON.stringify(updatedCart));
+};
+
+// Function to update the cart counter
+const updateCartCounter = (cartItems: IProduct[]) => { // Specify the type for cartItems
+  const totalCount = cartItems.reduce((total, item) => total + 1, 0);
+  setCartCounter(totalCount);
+};
 
 
 
@@ -143,9 +172,10 @@ function AddToCart(product:IProduct){
           </li>
           <li>
             <a className="nav-link" href="cart.html">
-              <Image alt='' src={cart} />
+              <Image alt='' src={cart1} />
             </a>
           </li>
+          <div className='cart_counter'>{cartCounter}</div>
         </ul>
       </div>
     </div>
@@ -155,6 +185,9 @@ function AddToCart(product:IProduct){
 
   {/* End Header/Navigation */}
   {/* Start Hero Section */}
+
+  <ToastContainer position="top-right" autoClose={3000} />
+
   <div className="hero">
     <div className="container">
       <div className="row justify-content-between">
@@ -211,23 +244,23 @@ function AddToCart(product:IProduct){
         {products.map((product, index) => {
 
           return(
-  <div className="col-12 col-md-4 col-lg-3 mb-5 mb-md-0" key={index}>
-    <a className="product-item">
-      <Image
-        src={product.img} // Make sure product.img contains a valid image URL
-        alt='product'
-        width={400}
-        height={400}
-        className="img-fluid product-thumbnail"
-      />
-      <h3 className="product-title">{product.title}</h3>
-      <strong className="product-price">R {product.price}</strong>
-      <span className="icon-cross" onClick={()=>AddToCart(product as IProduct)}>
-        <Image alt='cross' src={cross} className="img-fluid" />
-      </span>
-    </a>
-  </div>
-)})}
+            <div className="col-12 col-md-4 col-lg-3 mb-5 mb-md-0" key={index}>
+              <a className="product-item">
+                <Image
+                  src={product.img} // Make sure product.img contains a valid image URL
+                  alt='product'
+                  width={400}
+                  height={400}
+                  className="img-fluid product-thumbnail"
+                />
+                <h3 className="product-title">{product.title}</h3>
+                <strong className="product-price">R {product.price}</strong>
+                <span className="icon-cross" onClick={() => addToCart(product)}>
+                  <Image alt="cross" src={cross} className="img-fluid" />
+                </span>
+              </a>
+            </div>
+          )})}
 
 
 

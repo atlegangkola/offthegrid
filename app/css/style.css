@@ -22,6 +22,21 @@ body {
   display: flex;
   flex-direction: row;
 }
+
+.cart_counter{
+  width: 20px;
+  height: 20px;
+  color: white;
+}
+
+
+
+
+
+
+
+
+
 a {
   text-decoration: none;
   -webkit-transition: .3s all ease;

@@ -11,7 +11,7 @@ export const products = [
         title: "SunSynk Hybrid Inverter",
         description: "",
         price: 3294,
-        quantity:0
+        quantity:1
 
     },
     {
@@ -20,8 +20,7 @@ export const products = [
         title: "Canadian Solar",
         description: "",
         price: 4294,
-        quantity:0
-
+        quantity:1
     },
     {
         id: "3",
@@ -29,8 +28,7 @@ export const products = [
         title: "Canadian Invector",
         description: "",
         price: 13830,
-        quantity:0
-
+        quantity:1
     },
     {
         id: "4",
@@ -38,6 +36,6 @@ export const products = [
         title: "solar panel",
         description: "",
         price: 1234,
-        quantity:0
+        quantity:1
     }
 ]

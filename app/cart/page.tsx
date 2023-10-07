@@ -37,7 +37,7 @@ const CartPage = () => {
 
   // Function to retrieve products from localStorage
   const getProductsFromLocalStorage = () => {
-    const storedProducts = localStorage.getItem('myData');
+    const storedProducts = localStorage.getItem('cart');
     if (storedProducts) {
       const parsedProducts = JSON.parse(storedProducts);
       setCartProducts(parsedProducts);
@@ -88,7 +88,7 @@ const decreaseQuantity = (productId: string) => {
 
   // Function to update localStorage with the new cartProducts
   const updateLocalStorage = (updatedCartProducts: IProduct[]) => {
-    localStorage.setItem('myData', JSON.stringify(updatedCartProducts));
+    localStorage.setItem('cart', JSON.stringify(updatedCartProducts));
   };
 
   // Call the function to get products when the component mounts
