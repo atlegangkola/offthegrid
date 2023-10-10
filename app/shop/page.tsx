@@ -13,6 +13,7 @@ import envelope from '../images/envelope-outline.svg';
 import user from '../images/user.svg';
 import Link from 'next/link';
 import cart1 from '../images/cart.svg';
+import logo from './images/logo.png';
 
 
 
@@ -26,7 +27,8 @@ const shop = () => {
   >
     <div className="container">
       <a className="navbar-brand" href="index.html">
-        Furni<span>.</span>
+      <Image alt='' src={logo} height={50}/>
+      <span>.</span>
       </a>
       <button
         className="navbar-toggler"

@@ -13,6 +13,7 @@ import product2 from '../images/product-2.png';
 import sofa from '../images/sofa.png';
 import envelope from '../images/envelope-outline.svg';
 import Link from 'next/link';
+import logo from './images/logo.png';
 
 interface IProduct {
   id: string;
@@ -136,7 +137,8 @@ const decreaseQuantity = (productId: string) => {
   >
     <div className="container">
       <a className="navbar-brand" href="index.html">
-        Off The Grid<span>.</span>
+      <Image alt='' src={logo} height={50}/>
+      <span>.</span>
       </a>
       <button
         className="navbar-toggler"

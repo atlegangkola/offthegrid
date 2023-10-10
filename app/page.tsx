@@ -45,6 +45,7 @@ import imga7 from './images/imga7.png';
 import imga8 from './images/imga8.jpg';
 import imga9 from './images/imga9.jpg';
 import imga10 from './images/imga10.jpg';
+import logo from './images/logo.png';
 
 
 export default function Home() {
@@ -129,7 +130,8 @@ const updateCartCounter = (cartItems: IProduct[]) => { // Specify the type for c
   >
     <div className="container">
       <a className="navbar-brand" href="index.html">
-        Off The Grid<span>.</span>
+        <Image alt='' src={logo} height={50}/>
+          <span>.</span>
       </a>
       <button
         className="navbar-toggler"
@@ -369,7 +371,7 @@ const updateCartCounter = (cartItems: IProduct[]) => { // Specify the type for c
         </div>
         <div className="col-lg-5 ps-lg-5">
           <h2 className="section-title mb-4">
-            We Help You Make Modern Interior Design
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit
           </h2>
           <p>
             Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis

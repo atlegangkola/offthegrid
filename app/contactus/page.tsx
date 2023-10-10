@@ -7,6 +7,7 @@ import '../css/tiny-slider.css';
 import Link from 'next/link';
 import user from '../images/user.svg';
 import cart1 from '../images/cart.svg';
+import logo from './images/logo.png';
 
 const ContactUs = () => {
   return (
@@ -19,7 +20,8 @@ const ContactUs = () => {
   >
     <div className="container">
       <a className="navbar-brand" href="index.html">
-        Furni<span>.</span>
+      <Image alt='' src={logo} height={50}/>
+        <span>.</span>
       </a>
       <button
         className="navbar-toggler"
