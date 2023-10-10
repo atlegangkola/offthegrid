@@ -13,7 +13,7 @@ import product2 from '../images/product-2.png';
 import sofa from '../images/sofa.png';
 import envelope from '../images/envelope-outline.svg';
 import Link from 'next/link';
-import logo from './images/logo.png';
+import logo from '../images/logo.png';
 
 interface IProduct {
   id: string;

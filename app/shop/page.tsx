@@ -13,7 +13,7 @@ import envelope from '../images/envelope-outline.svg';
 import user from '../images/user.svg';
 import Link from 'next/link';
 import cart1 from '../images/cart.svg';
-import logo from './images/logo.png';
+import logo from '../images/logo.png';
 
 
 

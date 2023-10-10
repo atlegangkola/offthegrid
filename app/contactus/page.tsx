@@ -7,7 +7,7 @@ import '../css/tiny-slider.css';
 import Link from 'next/link';
 import user from '../images/user.svg';
 import cart1 from '../images/cart.svg';
-import logo from './images/logo.png';
+import logo from '../images/logo.png';
 
 const ContactUs = () => {
   return (
