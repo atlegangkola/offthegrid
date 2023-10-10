@@ -15,7 +15,7 @@ import envelope from '../images/envelope-outline.svg';
 
 interface IProduct {
   id: string;
-  img: StaticImageData;
+  img: any;
   title: string;
   description: string;
   price: number;

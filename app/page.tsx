@@ -34,6 +34,14 @@ import sofa from './images/sofa.png';
 import envelope from './images/envelope-outline.svg';
 import house from './images/house_bg.png';
 import s_image1 from './images/s-image1.jpg';
+import Link from 'next/link';
+import imga1 from './images/imga1.jpg';
+import imga2 from './images/imga2.jpg';
+import imga3 from './images/imga3.jpg';
+import imga4 from './images/imga4.jpg';
+import imga5 from './images/imga5.jpg';
+import imga6 from './images/imga6.png';
+import imga7 from './images/imga7.png';
 
 
 export default function Home() {
@@ -149,19 +157,9 @@ const updateCartCounter = (cartItems: IProduct[]) => { // Specify the type for c
             </a>
           </li>
           <li>
-            <a className="nav-link" href="services.html">
-              Services
-            </a>
-          </li>
-          <li>
-            <a className="nav-link" href="blog.html">
-              Blog
-            </a>
-          </li>
-          <li>
-            <a className="nav-link" href="contact.html">
-              Contact us
-            </a>
+            <Link href='./contactus' className="nav-link">
+              Contact Us
+            </Link>
           </li>
         </ul>
         <ul className="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
@@ -171,9 +169,9 @@ const updateCartCounter = (cartItems: IProduct[]) => { // Specify the type for c
             </a>
           </li>
           <li>
-            <a className="nav-link" href="cart.html">
+            <Link href="./cart" className='nav-link'>
               <Image alt='' src={cart1} />
-            </a>
+            </Link>
           </li>
           <div className='cart_counter'>{cartCounter}</div>
         </ul>
@@ -366,13 +364,13 @@ const updateCartCounter = (cartItems: IProduct[]) => { // Specify the type for c
         <div className="col-lg-7 mb-5 mb-lg-0">
           <div className="imgs-grid">
             <div className="grid grid-1">
-              <Image src={imggrid1} height={600} alt="Untree.co" />
+              <Image src={imga2} height={600} alt="Untree.co" />
             </div>
             <div className="grid grid-2">
-              <Image src={imggrid2} height={200} alt="Untree.co" />
+              <Image src={imga4} height={200} alt="Untree.co" />
             </div>
             <div className="grid grid-3">
-              <Image src={imggrid3} height={450} alt="Untree.co" />
+              <Image src={imga1} height={450} width={600} alt="Untree.co" />
             </div>
           </div>
         </div>
@@ -613,7 +611,7 @@ const updateCartCounter = (cartItems: IProduct[]) => { // Specify the type for c
         <div className="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
           <div className="post-entry">
             <a href="#" className="post-thumbnail">
-              <Image src={post1} alt="Image" className="img-fluid" />
+              <Image src={imga1} alt="Image" className="img-fluid" />
             </a>
             <div className="post-content-entry">
               <h3>
@@ -633,7 +631,7 @@ const updateCartCounter = (cartItems: IProduct[]) => { // Specify the type for c
         <div className="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
           <div className="post-entry">
             <a href="#" className="post-thumbnail">
-              <Image src={post2} alt="Image" className="img-fluid" />
+              <Image src={imga2} alt="Image" className="img-fluid" />
             </a>
             <div className="post-content-entry">
               <h3>
@@ -653,7 +651,7 @@ const updateCartCounter = (cartItems: IProduct[]) => { // Specify the type for c
         <div className="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
           <div className="post-entry">
             <a href="#" className="post-thumbnail">
-              <Image src={post3} alt="Image" className="img-fluid" />
+              <Image src={imga4} alt="Image" className="img-fluid" />
             </a>
             <div className="post-content-entry">
               <h3>
@@ -678,7 +676,7 @@ const updateCartCounter = (cartItems: IProduct[]) => { // Specify the type for c
   <footer className="footer-section">
     <div className="container relative">
       <div className="sofa-img">
-        <Image src={sofa} alt="Image" className="img-fluid" />
+        <Image src={imga7} alt="Image" className="img-fluid" />
       </div>
       <div className="row">
         <div className="col-lg-8">
@@ -721,7 +719,7 @@ const updateCartCounter = (cartItems: IProduct[]) => { // Specify the type for c
         <div className="col-lg-4">
           <div className="mb-4 footer-logo-wrap">
             <a href="#" className="footer-logo">
-              Furni<span>.</span>
+              Off The Grid<span>.</span>
             </a>
           </div>
           <p className="mb-4">
@@ -821,7 +819,7 @@ const updateCartCounter = (cartItems: IProduct[]) => { // Specify the type for c
             <p className="mb-2 text-center text-lg-start">
               Copyright ©. All Rights Reserved. — Designed with love by{" "}
               <a href="https://untree.co">Untree.co</a> Distributed By{" "}
-              <a href="https://themewagon.com">ThemeWagon</a>{" "}
+              <a></a>{" "}
               {/* License information: https://untree.co/license/ */}
             </p>
           </div>

@@ -29,13 +29,5 @@ export const products = [
         description: "",
         price: 13830,
         quantity:1
-    },
-    {
-        id: "4",
-        img: product_3,
-        title: "solar panel",
-        description: "",
-        price: 1234,
-        quantity:1
     }
 ]

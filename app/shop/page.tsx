@@ -10,7 +10,7 @@ import couch from '../images/couch.png';
 import cross from '../images/cross.svg';
 import sofa from '../images/sofa.png';
 import envelope from '../images/envelope-outline.svg';
-import user from './images/user.svg';
+import user from '../images/user.svg';
 
 
 const shop = () => {
