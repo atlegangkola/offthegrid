@@ -12,6 +12,7 @@ import product1 from '../images/product-1.png';
 import product2 from '../images/product-2.png';
 import sofa from '../images/sofa.png';
 import envelope from '../images/envelope-outline.svg';
+import Link from 'next/link';
 
 interface IProduct {
   id: string;
@@ -150,35 +151,15 @@ const decreaseQuantity = (productId: string) => {
       </button>
       <div className="collapse navbar-collapse" id="navbarsFurni">
         <ul className="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-          <li className="nav-item ">
+          <li className="nav-item active">
             <a className="nav-link" href="index.html">
               Home
             </a>
           </li>
           <li>
-            <a className="nav-link" href="shop.html">
-              Shop
-            </a>
-          </li>
-          <li>
-            <a className="nav-link" href="about.html">
-              About us
-            </a>
-          </li>
-          <li>
-            <a className="nav-link" href="services.html">
-              Services
-            </a>
-          </li>
-          <li>
-            <a className="nav-link" href="blog.html">
-              Blog
-            </a>
-          </li>
-          <li>
-            <a className="nav-link" href="contact.html">
-              Contact us
-            </a>
+            <Link href='./contactus' className="nav-link">
+              Contact Us
+            </Link>
           </li>
         </ul>
         <ul className="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
@@ -188,10 +169,11 @@ const decreaseQuantity = (productId: string) => {
             </a>
           </li>
           <li>
-            <a className="nav-link" href="cart.html">
+            <Link href="./cart" className='nav-link'>
               <Image alt='' src={cart1} />
-            </a>
+            </Link>
           </li>
+          
         </ul>
       </div>
     </div>

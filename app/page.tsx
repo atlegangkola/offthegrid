@@ -150,16 +150,6 @@ const updateCartCounter = (cartItems: IProduct[]) => { // Specify the type for c
             </a>
           </li>
           <li>
-            <a className="nav-link" href="shop.html">
-              Shop
-            </a>
-          </li>
-          <li>
-            <a className="nav-link" href="about.html">
-              About us
-            </a>
-          </li>
-          <li>
             <Link href='./contactus' className="nav-link">
               Contact Us
             </Link>

@@ -4,6 +4,9 @@ import '../scss/style.scss';
 import '../css/style.css';
 import '../css/bootstrap.min.css';
 import '../css/tiny-slider.css';
+import Link from 'next/link';
+import user from '../images/user.svg';
+import cart1 from '../images/cart.svg';
 
 const ContactUs = () => {
   return (
@@ -31,48 +34,29 @@ const ContactUs = () => {
       </button>
       <div className="collapse navbar-collapse" id="navbarsFurni">
         <ul className="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-          <li className="nav-item">
+          <li className="nav-item active">
             <a className="nav-link" href="index.html">
               Home
             </a>
           </li>
           <li>
-            <a className="nav-link" href="shop.html">
-              Shop
-            </a>
-          </li>
-          <li>
-            <a className="nav-link" href="about.html">
-              About us
-            </a>
-          </li>
-          <li>
-            <a className="nav-link" href="services.html">
-              Services
-            </a>
-          </li>
-          <li>
-            <a className="nav-link" href="blog.html">
-              Blog
-            </a>
-          </li>
-          <li className="active">
-            <a className="nav-link" href="contact.html">
-              Contact us
-            </a>
+            <Link href='./contactus' className="nav-link">
+              Contact Us
+            </Link>
           </li>
         </ul>
         <ul className="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
           <li>
             <a className="nav-link" href="#">
-              <img src="images/user.svg" />
+              <Image alt='' src={user} />
             </a>
           </li>
           <li>
-            <a className="nav-link" href="cart.html">
-              <img src="images/cart.svg" />
-            </a>
+            <Link href="./cart" className='nav-link'>
+              <Image alt='' src={cart1} />
+            </Link>
           </li>
+          
         </ul>
       </div>
     </div>
