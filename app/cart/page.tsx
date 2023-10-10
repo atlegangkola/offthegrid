@@ -136,7 +136,7 @@ const decreaseQuantity = (productId: string) => {
   >
     <div className="container">
       <a className="navbar-brand" href="index.html">
-        Furni<span>.</span>
+        Off The Grid<span>.</span>
       </a>
       <button
         className="navbar-toggler"
