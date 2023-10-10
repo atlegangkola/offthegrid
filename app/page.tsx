@@ -42,6 +42,9 @@ import imga4 from './images/imga4.jpg';
 import imga5 from './images/imga5.jpg';
 import imga6 from './images/imga6.png';
 import imga7 from './images/imga7.png';
+import imga8 from './images/imga8.jpg';
+import imga9 from './images/imga9.jpg';
+import imga10 from './images/imga10.jpg';
 
 
 export default function Home() {
@@ -408,7 +411,7 @@ const updateCartCounter = (cartItems: IProduct[]) => { // Specify the type for c
           <div className="product-item-sm d-flex">
             <div className="thumbnail">
               <Image
-                src={product1}
+                src={imga8}
                 alt="Image"
                 className="img-fluid"
               />
@@ -428,7 +431,7 @@ const updateCartCounter = (cartItems: IProduct[]) => { // Specify the type for c
           <div className="product-item-sm d-flex">
             <div className="thumbnail">
               <Image
-                src={product2}
+                src={imga9}
                 alt="Image"
                 className="img-fluid"
               />
@@ -448,7 +451,7 @@ const updateCartCounter = (cartItems: IProduct[]) => { // Specify the type for c
           <div className="product-item-sm d-flex">
             <div className="thumbnail">
               <Image
-                src={product3}
+                src={imga10}
                 alt="Image"
                 className="img-fluid"
               />
